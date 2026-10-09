@@ -21,10 +21,10 @@ Personal CV / portfolio page for **Syaifa Amanda Putri Lubis**, a QA Engineer wi
 
 ```bash
 npm install
-npm run dev -- --hostname 0.0.0.0 --port 4321
+npm run dev
 ```
 
-Open [http://127.0.0.1:4321](http://127.0.0.1:4321).
+Open [http://127.0.0.1:5500](http://127.0.0.1:5500).
 
 ## Scripts
 
