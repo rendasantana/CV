@@ -1,5 +1,5 @@
+import { CvSections } from "@/components/portfolio/cv-sections";
 import { Hero } from "@/components/portfolio/hero";
-import { PortfolioSections } from "@/components/portfolio/portfolio-sections";
 import { SectionNav } from "@/components/portfolio/section-nav";
 import { SiteFooter } from "@/components/portfolio/site-footer";
 
@@ -9,7 +9,7 @@ export default function Home() {
       <Hero />
       <SectionNav />
       <main className="flex-1">
-        <PortfolioSections />
+        <CvSections />
       </main>
       <SiteFooter />
     </div>

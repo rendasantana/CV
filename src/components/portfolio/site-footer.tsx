@@ -11,9 +11,10 @@ export function SiteFooter() {
             {profile.shortName}
           </p>
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-sand/70">
-            Open to QA Engineer roles — manual, automation, API, and performance.
-            Mari bicarakan kebutuhan kualitas produkmu.
+            {profile.role} based in {profile.location}. Open to roles in
+            functional, regression, and performance testing for web and mobile.
           </p>
+          <p className="mt-3 text-sm text-sand/55">{profile.phone}</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <a
@@ -26,13 +27,24 @@ export function SiteFooter() {
             Email
           </a>
           <a
-            href="#portfolio"
+            href={profile.phoneHref}
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
               "rounded-full border-sand/30 bg-transparent text-sand hover:bg-sand/10 hover:text-sand",
             )}
           >
-            Kembali ke portfolio
+            Call
+          </a>
+          <a
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "rounded-full border-sand/30 bg-transparent text-sand hover:bg-sand/10 hover:text-sand",
+            )}
+          >
+            LinkedIn
           </a>
         </div>
       </div>

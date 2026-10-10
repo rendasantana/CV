@@ -150,18 +150,21 @@ export function Hero() {
           <h1 className="reveal delay-1 mt-3 font-display text-[clamp(2.25rem,6.5vw,4.5rem)] leading-[0.98] tracking-tight text-ink">
             {profile.name}
           </h1>
-          <p className="reveal delay-2 mt-5 max-w-md text-sm leading-relaxed text-ink/75 sm:text-base">
+          <p className="reveal delay-2 mt-5 max-w-lg text-sm leading-relaxed text-ink/75 sm:text-base">
             {profile.tagline}
+          </p>
+          <p className="reveal delay-2 mt-3 text-sm text-teal-900/60">
+            {profile.location}
           </p>
           <div className="reveal delay-3 mt-7 flex flex-wrap items-center gap-3">
             <a
-              href="#portfolio"
+              href="#experience"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "rounded-full bg-teal-900 px-6 text-sand hover:bg-teal-800",
               )}
             >
-              Lihat portfolio
+              View experience
               <ArrowDown className="size-4" />
             </a>
             <a
@@ -171,7 +174,18 @@ export function Hero() {
                 "rounded-full border-teal-900/20 bg-white/40 text-teal-950 backdrop-blur-sm hover:bg-white/70",
               )}
             >
-              Hubungi saya
+              Email
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "rounded-full border-teal-900/20 bg-white/40 text-teal-950 backdrop-blur-sm hover:bg-white/70",
+              )}
+            >
+              LinkedIn
             </a>
           </div>
         </div>
