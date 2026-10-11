@@ -1,9 +1,9 @@
 {
-  "name": "syaifa-portfolio",
+  "name": "renda-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0 -p 5500",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

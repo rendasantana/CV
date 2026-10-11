@@ -1,15 +1,14 @@
-# Syaifa Amanda — QA Portfolio
+# Renda Arya Santana — QA Portfolio
 
-Personal CV / portfolio page for **Syaifa Amanda Putri Lubis**, a QA Engineer with 6+ years across Web, Mobile, API, and Performance testing. Inspired by a Carrd-style single-page CV, rebuilt with Next.js.
+Personal CV / portfolio page for **Renda Arya Santana**, Software QA Engineer based in Malang, East Java. Built with Next.js.
 
 ## Sections
 
-- Hero introduction with CTAs
-- Web Testing (cases, Qase, Katalon, Selenium)
-- Android Testing
-- API Testing
-- Performance Testing (JMeter, K6)
-- Contact footer
+- Hero introduction with contact CTAs
+- Experience (Majoo Indonesia, PT Exel Sistem Solusindo, Livien Furniture)
+- Projects (My Add Telkomsel, Majoo CRM, Dashboard, Cockpit)
+- Skills and languages
+- Education
 
 ## Stack
 
@@ -21,16 +20,16 @@ Personal CV / portfolio page for **Syaifa Amanda Putri Lubis**, a QA Engineer wi
 
 ```bash
 npm install
-npm run dev -- --hostname 0.0.0.0 --port 4321
+npm run dev
 ```
 
-Open [http://127.0.0.1:4321](http://127.0.0.1:4321).
+Open [http://127.0.0.1:5500](http://127.0.0.1:5500).
 
 ## Scripts
 
-| Command        | Description              |
-| -------------- | ------------------------ |
-| `npm run dev`  | Start development server |
-| `npm run build`| Production build         |
-| `npm run start`| Serve production build   |
-| `npm run lint` | Run ESLint               |
+| Command         | Description              |
+| --------------- | ------------------------ |
+| `npm run dev`   | Start development server |
+| `npm run build` | Production build         |
+| `npm run start` | Serve production build   |
+| `npm run lint`  | Run ESLint               |
