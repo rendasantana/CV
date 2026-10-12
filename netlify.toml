@@ -1,0 +1,15 @@
+# Next.js 16 on Netlify (OpenNext adapter).
+# Netlify auto-installs @netlify/plugin-nextjs on each build — do not pin it
+# unless you intentionally need a specific adapter version.
+# Docs: https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Optional: enable Next.js skew protection after first successful deploy
+# [build.environment]
+#   NETLIFY_NEXT_SKEW_PROTECTION = "true"
