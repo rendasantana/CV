@@ -194,11 +194,13 @@
   animation-delay: 0.36s;
 }
 
-.portfolio-item {
+.portfolio-item,
+.case-study {
   transition: background-color 0.25s ease;
 }
 
-.portfolio-item:hover {
+.portfolio-item:hover,
+.case-study:hover {
   background: color-mix(in oklab, #e8efe9 3.5%, transparent);
 }
 

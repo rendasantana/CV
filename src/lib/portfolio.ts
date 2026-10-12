@@ -12,11 +12,28 @@ export type ExperienceRole = {
   highlights: string[];
 };
 
+export type ProofLink = {
+  label: string;
+  href: string;
+};
+
 export type Project = {
   id: string;
   title: string;
   description: string;
   context?: string;
+  /** Optional proof links (Qase, docs, GitHub). Omit or use `#` until real URLs exist. */
+  proofLinks?: ProofLink[];
+};
+
+export type CaseStudy = {
+  id: string;
+  title: string;
+  context: string;
+  role: string;
+  tested: string[];
+  tools: string[];
+  outcome: string;
 };
 
 export type EducationItem = {
@@ -38,15 +55,69 @@ export const profile = {
   phone: "+6281358571315",
   phoneHref: "tel:+6281358571315",
   linkedin: "https://linkedin.com/in/rendasantana",
+  cvPdf: "/renda-santana-cv.pdf",
   focus:
     "Passionate about improving product quality, minimizing defects, and delivering seamless user experiences.",
 };
 
+export const about = {
+  headline: "QA engineer for web, mobile, API, and performance.",
+  paragraphs: [
+    "Saya Renda Arya Santana, Software QA Engineer berbasis di Malang, East Java. Fokus saya adalah menjaga kualitas produk lewat functional, regression, dan performance testing — di web, mobile, API, maupun skenario end-to-end.",
+    "Pengalaman utama saya di Majoo Indonesia (dashboard, CRM sales, cockpit, dan mobile POS) dan sebelumnya di PT Exel Sistem Solusindo untuk produk MyAds Telkomsel. Saya terbiasa menulis dokumentasi & skenario uji, memastikan fitur berjalan sesuai harapan, dan memakai Cypress.io, Katalon, Postman, serta Clickup dalam pekerjaan sehari-hari.",
+    "Yang paling saya kuasai: merancang cakupan uji yang rapi, mengejar defect sebelum rilis, dan menjaga pengalaman pengguna tetap mulus di lintas platform.",
+  ],
+};
+
 export const navSections: NavSection[] = [
-  { id: "experience", title: "Experience" },
+  { id: "about", title: "About" },
+  { id: "case-studies", title: "Case studies" },
   { id: "projects", title: "Projects" },
+  { id: "experience", title: "Experience" },
   { id: "skills", title: "Skills" },
   { id: "education", title: "Education" },
+  { id: "contact", title: "Contact" },
+];
+
+export const caseStudies: CaseStudy[] = [
+  {
+    id: "my-add-telkomsel",
+    title: "My Add Telkomsel",
+    context:
+      "Ad & campaign platform (MyAds Telkomsel) di PT Exel Sistem Solusindo — produk yang dipakai untuk kampanye iklan dan pengelolaan campaign.",
+    role: "Software Test Engineer",
+    tested: [
+      "End-to-end testing alur ad & campaign platform.",
+      "Functional testing untuk skenario fitur inti.",
+      "Performance testing sebagai bagian dari cakupan uji produk.",
+    ],
+    tools: [
+      "End-to-end testing",
+      "Functional testing",
+      "Performance testing",
+    ],
+    outcome:
+      "Cakupan uji end-to-end, functional, dan performance untuk platform ad & campaign — sesuai tanggung jawab di CV, tanpa klaim metrik tambahan.",
+  },
+  {
+    id: "majoo-crm",
+    title: "Majoo CRM",
+    context:
+      "CRM sales web di Majoo Indonesia — platform dari marketing setup hingga subscription management, berdampingan dengan dashboard, cockpit, dan mobile POS.",
+    role: "Quality Assurance Engineer",
+    tested: [
+      "Functional testing untuk fitur CRM sales web.",
+      "Penulisan dokumentasi pengujian dan test scenarios.",
+      "Validasi perilaku fitur agar sesuai ekspektasi di lingkungan web.",
+    ],
+    tools: [
+      "Functional testing",
+      "Test documentation & scenarios",
+      "Cypress.io, Katalon Studio, Postman, Clickup",
+    ],
+    outcome:
+      "Fitur CRM dari marketing setup sampai subscription management diuji secara functional dan terdokumentasi, sejalan dengan tanggung jawab QA di Majoo untuk web dan mobile.",
+  },
 ];
 
 export const experience: ExperienceRole[] = [
@@ -94,6 +165,8 @@ export const projects: Project[] = [
     context: "Ad & campaign platform",
     description:
       "End-to-end testing on an ad and campaign platform, covering functional and performance scenarios.",
+    // Add real Qase / docs / GitHub URLs when available — do not invent.
+    proofLinks: undefined,
   },
   {
     id: "majoo-crm",
@@ -101,6 +174,7 @@ export const projects: Project[] = [
     context: "CRM sales web",
     description:
       "CRM sales web platform with features for marketing setup through to subscription management.",
+    proofLinks: undefined,
   },
   {
     id: "majoo-dashboard",
@@ -108,6 +182,7 @@ export const projects: Project[] = [
     context: "Sales & employee management",
     description:
       "Sales and employee management dashboard testing, including API and UI.",
+    proofLinks: undefined,
   },
   {
     id: "majoo-cockpit",
@@ -115,6 +190,7 @@ export const projects: Project[] = [
     context: "Dashboard & POS menu management",
     description:
       "A web cockpit for managing menu features in the Majoo dashboard and POS.",
+    proofLinks: undefined,
   },
 ];
 

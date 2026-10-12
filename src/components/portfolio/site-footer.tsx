@@ -1,13 +1,17 @@
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
+import { Download } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-ink/10 bg-teal-950 text-ink">
+    <footer id="contact" className="scroll-mt-24 border-t border-ink/10 bg-teal-950 text-ink">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-14 sm:flex-row sm:items-end sm:justify-between sm:px-10">
         <div>
-          <p className="font-display text-2xl tracking-tight sm:text-3xl">
+          <p className="text-xs font-medium tracking-[0.2em] text-gold/55 uppercase">
+            Hubungi saya
+          </p>
+          <p className="mt-3 font-display text-2xl tracking-tight sm:text-3xl">
             {profile.shortName}
           </p>
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink/55">
@@ -15,13 +19,25 @@ export function SiteFooter() {
             functional, regression, and performance testing for web and mobile.
           </p>
           <p className="mt-3 text-sm text-ink/40">{profile.phone}</p>
+          <p className="mt-1 text-sm text-ink/40">{profile.email}</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <a
-            href={`mailto:${profile.email}`}
+            href={profile.cvPdf}
+            download
             className={cn(
               buttonVariants({ size: "lg" }),
               "rounded-full bg-gold text-teal-950 hover:bg-[#e0c9a8]",
+            )}
+          >
+            <Download className="size-4" />
+            Download CV
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "rounded-full border-ink/20 bg-transparent text-ink hover:bg-ink/10",
             )}
           >
             Email

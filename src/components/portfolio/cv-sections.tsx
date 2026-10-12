@@ -1,13 +1,23 @@
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import {
+  about,
+  caseStudies,
   education,
   experience,
-  navSections,
-  profile,
   projects,
   skills,
 } from "@/lib/portfolio";
+import { ExternalLink } from "lucide-react";
+
+const sectionOrder = [
+  "about",
+  "case-studies",
+  "projects",
+  "experience",
+  "skills",
+  "education",
+] as const;
 
 function SectionHeader({
   index,
@@ -24,66 +34,117 @@ function SectionHeader({
         <h3 className="font-display text-2xl tracking-tight text-ink sm:text-3xl">
           {title}
         </h3>
-        <p className="mt-2 text-sm text-ink/50 sm:text-base">{blurb}</p>
+        <p className="mt-2 max-w-xl text-sm text-ink/50 sm:text-base">{blurb}</p>
       </div>
       <p className="text-xs font-medium tracking-wider text-gold/50 uppercase">
         {String(index + 1).padStart(2, "0")} /{" "}
-        {String(navSections.length).padStart(2, "0")}
+        {String(sectionOrder.length).padStart(2, "0")}
       </p>
     </div>
   );
 }
 
 export function CvSections() {
+  const sectionIndex = (id: (typeof sectionOrder)[number]) =>
+    sectionOrder.indexOf(id);
+
   return (
     <div id="portfolio" className="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-24">
-      <header className="mb-14 max-w-2xl">
-        <p className="font-sans text-sm font-medium tracking-[0.2em] text-gold/65 uppercase">
-          Curriculum Vitae
-        </p>
-        <h2 className="mt-3 font-display text-3xl tracking-tight text-ink sm:text-4xl">
-          Experience, projects, and skills
-        </h2>
-        <p className="mt-4 text-base leading-relaxed text-ink/60">
-          {profile.focus} Based in {profile.location}.
-        </p>
-      </header>
-
       <div className="space-y-16 sm:space-y-20">
-        <section id="experience" className="scroll-mt-24">
+        <section id="about" className="scroll-mt-24">
           <SectionHeader
-            index={0}
-            title="Experience"
-            blurb="Roles across QA engineering and web operations."
+            index={sectionIndex("about")}
+            title="About"
+            blurb={about.headline}
           />
-          <Separator className="mb-2 bg-ink/10" />
-          <div>
-            {experience.map((role) => (
+          <Separator className="mb-6 bg-ink/10" />
+          <div className="max-w-3xl space-y-4 text-sm leading-relaxed text-ink/60 sm:text-base">
+            {about.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <section id="case-studies" className="scroll-mt-24">
+          <SectionHeader
+            index={sectionIndex("case-studies")}
+            title="Featured case studies"
+            blurb="Dua produk utama: konteks, cakupan uji, tooling, dan hasil — dari CV, tanpa metrik invent."
+          />
+          <Separator className="mb-8 bg-ink/10" />
+          <div className="space-y-12">
+            {caseStudies.map((study, studyIndex) => (
               <article
-                key={role.id}
-                className="portfolio-item border-t border-ink/10 py-7 first:border-t-0 first:pt-0"
+                key={study.id}
+                className="case-study border-t border-ink/10 pt-8 first:border-t-0 first:pt-0"
               >
-                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                  <h4 className="font-display text-xl tracking-tight text-ink sm:text-2xl">
-                    {role.title}
-                  </h4>
-                  <p className="shrink-0 text-sm text-gold/55">{role.period}</p>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <div>
+                    <p className="text-xs font-medium tracking-[0.18em] text-gold/55 uppercase">
+                      Case {String(studyIndex + 1).padStart(2, "0")}
+                    </p>
+                    <h4 className="mt-2 font-display text-2xl tracking-tight text-ink sm:text-3xl">
+                      {study.title}
+                    </h4>
+                  </div>
+                  <p className="shrink-0 text-sm text-ink/45">{study.role}</p>
                 </div>
-                <p className="mt-1 text-sm font-medium text-ink/70">{role.company}</p>
-                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink/55 sm:text-base">
-                  {role.summary}
-                </p>
-                <ul className="mt-4 max-w-3xl space-y-2 text-sm leading-relaxed text-ink/60">
-                  {role.highlights.map((item) => (
-                    <li key={item} className="flex gap-2.5">
-                      <span
-                        aria-hidden
-                        className="mt-2 size-1.5 shrink-0 rounded-full bg-gold/60"
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+
+                <div className="mt-6 grid gap-8 lg:grid-cols-2">
+                  <div className="space-y-5">
+                    <div>
+                      <h5 className="text-xs font-medium tracking-wider text-gold/50 uppercase">
+                        Context
+                      </h5>
+                      <p className="mt-2 text-sm leading-relaxed text-ink/60 sm:text-base">
+                        {study.context}
+                      </p>
+                    </div>
+                    <div>
+                      <h5 className="text-xs font-medium tracking-wider text-gold/50 uppercase">
+                        What I tested
+                      </h5>
+                      <ul className="mt-2 space-y-2 text-sm leading-relaxed text-ink/60">
+                        {study.tested.map((item) => (
+                          <li key={item} className="flex gap-2.5">
+                            <span
+                              aria-hidden
+                              className="mt-2 size-1.5 shrink-0 rounded-full bg-gold/60"
+                            />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="space-y-5">
+                    <div>
+                      <h5 className="text-xs font-medium tracking-wider text-gold/50 uppercase">
+                        Tools & approach
+                      </h5>
+                      <ul className="mt-3 flex flex-wrap gap-2">
+                        {study.tools.map((tool) => (
+                          <li key={tool}>
+                            <Badge
+                              variant="secondary"
+                              className="rounded-full border border-ink/10 bg-ink/5 px-3 py-1 text-ink/75 hover:bg-ink/5"
+                            >
+                              {tool}
+                            </Badge>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="text-xs font-medium tracking-wider text-gold/50 uppercase">
+                        Outcome
+                      </h5>
+                      <p className="mt-2 text-sm leading-relaxed text-ink/60 sm:text-base">
+                        {study.outcome}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
@@ -91,9 +152,9 @@ export function CvSections() {
 
         <section id="projects" className="scroll-mt-24">
           <SectionHeader
-            index={1}
+            index={sectionIndex("projects")}
             title="Projects"
-            blurb="Products covered in functional, API, UI, and performance testing."
+            blurb="Daftar produk yang diuji. Slot proof link siap untuk Qase, docs, atau GitHub."
           />
           <Separator className="mb-2 bg-ink/10" />
           <div>
@@ -118,6 +179,67 @@ export function CvSections() {
                 <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink/55 sm:text-base">
                   {project.description}
                 </p>
+                {project.proofLinks && project.proofLinks.length > 0 ? (
+                  <ul className="mt-4 flex flex-wrap gap-3">
+                    {project.proofLinks.map((link) => (
+                      <li key={`${link.label}-${link.href}`}>
+                        <a
+                          href={link.href}
+                          {...(link.href.startsWith("http")
+                            ? { target: "_blank", rel: "noopener noreferrer" }
+                            : {})}
+                          className="inline-flex items-center gap-1.5 text-sm text-gold/80 transition-colors hover:text-gold"
+                        >
+                          {link.label}
+                          <ExternalLink className="size-3.5 opacity-70" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="experience" className="scroll-mt-24">
+          <SectionHeader
+            index={sectionIndex("experience")}
+            title="Experience"
+            blurb="Perjalanan QA engineering dan operasi web."
+          />
+          <Separator className="mb-2 bg-ink/10" />
+          <div>
+            {experience.map((role) => (
+              <article
+                key={role.id}
+                className="portfolio-item border-t border-ink/10 py-7 first:border-t-0 first:pt-0"
+              >
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <div>
+                    <p className="text-xs font-medium tracking-wider text-gold/50 uppercase">
+                      {role.company}
+                    </p>
+                    <h4 className="mt-1 font-display text-xl tracking-tight text-ink sm:text-2xl">
+                      {role.title}
+                    </h4>
+                  </div>
+                  <p className="shrink-0 text-sm text-gold/55">{role.period}</p>
+                </div>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink/55 sm:text-base">
+                  {role.summary}
+                </p>
+                <ul className="mt-4 max-w-3xl space-y-2 text-sm leading-relaxed text-ink/60">
+                  {role.highlights.map((item) => (
+                    <li key={item} className="flex gap-2.5">
+                      <span
+                        aria-hidden
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-gold/60"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>
@@ -125,17 +247,17 @@ export function CvSections() {
 
         <section id="skills" className="scroll-mt-24">
           <SectionHeader
-            index={2}
+            index={sectionIndex("skills")}
             title="Skills"
-            blurb="Tools and strengths used day to day in QA work."
+            blurb="Tools dan kekuatan yang dipakai sehari-hari di kerja QA."
           />
-          <Separator className="mb-6 bg-ink/10" />
-          <div className="grid gap-8 sm:grid-cols-3">
+          <Separator className="mb-8 bg-ink/10" />
+          <div className="grid gap-10 sm:grid-cols-3">
             <div>
-              <h4 className="text-sm font-medium tracking-wide text-gold/55 uppercase">
+              <h4 className="text-xs font-medium tracking-[0.18em] text-gold/55 uppercase">
                 Technical
               </h4>
-              <ul className="mt-3 flex flex-wrap gap-2">
+              <ul className="mt-4 flex flex-wrap gap-2">
                 {skills.technical.map((skill) => (
                   <li key={skill}>
                     <Badge
@@ -149,10 +271,10 @@ export function CvSections() {
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-medium tracking-wide text-gold/55 uppercase">
+              <h4 className="text-xs font-medium tracking-[0.18em] text-gold/55 uppercase">
                 Soft skills
               </h4>
-              <ul className="mt-3 flex flex-wrap gap-2">
+              <ul className="mt-4 flex flex-wrap gap-2">
                 {skills.soft.map((skill) => (
                   <li key={skill}>
                     <Badge
@@ -166,14 +288,14 @@ export function CvSections() {
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-medium tracking-wide text-gold/55 uppercase">
+              <h4 className="text-xs font-medium tracking-[0.18em] text-gold/55 uppercase">
                 Languages
               </h4>
-              <ul className="mt-3 space-y-2 text-sm text-ink/60">
+              <ul className="mt-4 space-y-3 text-sm text-ink/60">
                 {skills.languages.map((lang) => (
-                  <li key={lang.name}>
+                  <li key={lang.name} className="border-l border-gold/30 pl-3">
                     <span className="font-medium text-ink">{lang.name}</span>
-                    <span className="text-ink/40"> — {lang.level}</span>
+                    <span className="mt-0.5 block text-ink/40">{lang.level}</span>
                   </li>
                 ))}
               </ul>
@@ -183,9 +305,9 @@ export function CvSections() {
 
         <section id="education" className="scroll-mt-24">
           <SectionHeader
-            index={3}
+            index={sectionIndex("education")}
             title="Education"
-            blurb="Formal study and focused programming training."
+            blurb="Studi formal dan pelatihan programming."
           />
           <Separator className="mb-2 bg-ink/10" />
           <div>
@@ -195,14 +317,16 @@ export function CvSections() {
                 className="portfolio-item border-t border-ink/10 py-7 first:border-t-0 first:pt-0"
               >
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                  <h4 className="font-display text-xl tracking-tight text-ink sm:text-2xl">
-                    {item.program}
-                  </h4>
+                  <div>
+                    <p className="text-xs font-medium tracking-wider text-gold/50 uppercase">
+                      {item.institution}
+                    </p>
+                    <h4 className="mt-1 font-display text-xl tracking-tight text-ink sm:text-2xl">
+                      {item.program}
+                    </h4>
+                  </div>
                   <p className="shrink-0 text-sm text-gold/55">{item.period}</p>
                 </div>
-                <p className="mt-1 text-sm font-medium text-ink/70">
-                  {item.institution}
-                </p>
                 {item.detail ? (
                   <p className="mt-2 text-sm text-ink/55">{item.detail}</p>
                 ) : null}

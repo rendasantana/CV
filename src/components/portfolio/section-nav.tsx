@@ -9,7 +9,7 @@ export function SectionNav() {
       aria-label="CV sections"
       className="sticky top-0 z-30 border-b border-ink/8 bg-sand/85 backdrop-blur-md"
     >
-      <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-3 sm:px-10">
+      <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-3 [scrollbar-width:none] sm:px-10 [&::-webkit-scrollbar]:hidden">
         {navSections.map((section) => (
           <a
             key={section.id}

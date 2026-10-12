@@ -4,7 +4,7 @@ import Image from "next/image";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
-import { ArrowDown } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 
 export function Hero() {
   return (
@@ -30,31 +30,33 @@ export function Hero() {
           <p className="reveal delay-2 mt-3 text-sm text-ink/45">{profile.location}</p>
           <div className="reveal delay-3 mt-8 flex flex-wrap items-center gap-3">
             <a
-              href="#experience"
+              href={profile.cvPdf}
+              download
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "rounded-full bg-gold px-6 text-teal-950 hover:bg-[#e0c9a8]",
               )}
             >
-              View experience
-              <ArrowDown className="size-4" />
+              <Download className="size-4" />
+              Download CV
             </a>
             <a
-              href={`mailto:${profile.email}`}
+              href="#contact"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "rounded-full border-ink/20 bg-ink/5 text-ink hover:bg-ink/10",
               )}
             >
-              Email
+              <Mail className="size-4" />
+              Hubungi saya
             </a>
             <a
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "rounded-full border-ink/20 bg-ink/5 text-ink hover:bg-ink/10",
+                buttonVariants({ variant: "ghost", size: "lg" }),
+                "rounded-full text-ink/70 hover:bg-ink/8 hover:text-ink",
               )}
             >
               LinkedIn
@@ -62,7 +64,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Dominant photo plane — edge-to-edge visual on large screens */}
         <div className="hero-photo order-1 relative mx-auto w-full max-w-md lg:order-2 lg:mx-0 lg:max-w-none">
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2rem] bg-teal-900/40 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.8)] ring-1 ring-ink/10">
             <Image
