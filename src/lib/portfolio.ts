@@ -32,7 +32,7 @@ export const profile = {
   shortName: "Renda Santana",
   role: "Software QA Engineer",
   tagline:
-    "Software QA Engineer with 5+ years of experience in functional, regression, and performance testing for web and mobile platforms. Skilled in Cypress.io, Katalon, Postman, and Jira.",
+    "Software QA Engineer with 5+ years of experience in functional, regression, and performance testing for web and mobile platforms. Skilled in Cypress.io, Katalon, Postman, and Clickup.",
   location: "Malang, East Java",
   email: "rendasantana@gmail.com",
   phone: "+6281358571315",
