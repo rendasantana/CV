@@ -18,6 +18,14 @@ const body = Manrope({
 export const metadata: Metadata = {
   title: `${profile.name} — QA Portfolio`,
   description: profile.tagline,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
