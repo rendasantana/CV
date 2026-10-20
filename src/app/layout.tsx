@@ -19,12 +19,20 @@ export const metadata: Metadata = {
   title: `${profile.name} — QA Portfolio`,
   description: profile.tagline,
   icons: {
+    // PNG first — avoids broken/legacy ICO decode glitches in some browsers
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
       { url: "/icon-32.png", type: "image/png", sizes: "32x32" },
       { url: "/icon-16.png", type: "image/png", sizes: "16x16" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/favicon.ico", sizes: "48x48" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        type: "image/png",
+        sizes: "180x180",
+      },
+    ],
   },
 };
 
