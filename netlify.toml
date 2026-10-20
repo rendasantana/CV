@@ -13,3 +13,17 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Custom domain: apex is primary; www redirects to apex.
+# Domain attached on site "rendasantana"; Netlify DNS zone holds NETLIFY records.
+[[redirects]]
+  from = "https://www.rendasantana.my.id/*"
+  to = "https://rendasantana.my.id/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.rendasantana.my.id/*"
+  to = "https://rendasantana.my.id/:splat"
+  status = 301
+  force = true
