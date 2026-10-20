@@ -21,8 +21,9 @@ export function LinkedInLogoButton({ className }: LinkedInLogoButtonProps) {
       aria-label="LinkedIn"
       title="LinkedIn"
       className={cn(
-        "group inline-flex h-9 shrink-0 items-center justify-center rounded-full px-1.5 transition-opacity",
-        "hover:opacity-85",
+        "group inline-flex h-9 shrink-0 items-center justify-center rounded-full px-1.5",
+        "transition-[opacity,transform] duration-200 ease-out",
+        "hover:-translate-y-0.5 hover:opacity-90",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-sand",
         "active:translate-y-px",
         className,
@@ -33,7 +34,7 @@ export function LinkedInLogoButton({ className }: LinkedInLogoButtonProps) {
         alt=""
         width={136}
         height={40}
-        className="h-[22px] w-auto object-contain object-center drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]"
+        className="h-[22px] w-auto object-contain object-center drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)] transition-transform duration-200 ease-out group-hover:translate-x-0.5"
         sizes="140px"
         priority={false}
       />

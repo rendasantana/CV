@@ -204,12 +204,28 @@
   background: color-mix(in oklab, #e8efe9 3.5%, transparent);
 }
 
+/* Hero CTA — Isak-style dual pair + social; motion only, palette unchanged */
+.hero-cta-row {
+  row-gap: 0.75rem;
+}
+
+.hero-cta {
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .hero-orb,
   .hero-photo {
     animation: none !important;
     opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-cta,
+  .hero-cta-social-link,
+  .hero-cta-social-link img {
+    transition: none !important;
     transform: none !important;
   }
 }

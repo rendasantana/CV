@@ -39,7 +39,7 @@ export function CvDownloadDialog({
           <Button
             size="lg"
             className={cn(
-              "rounded-full bg-gold px-6 text-teal-950 hover:bg-[#e0c9a8]",
+              "rounded-full bg-gold px-6 text-teal-950 transition-[transform,box-shadow,background-color] duration-200 ease-out hover:bg-[#e0c9a8]",
               triggerClassName,
             )}
           />
