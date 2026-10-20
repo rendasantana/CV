@@ -3,10 +3,8 @@
 import { useLocale } from "@/components/i18n/locale-provider";
 import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
 import { LinkedInLogoButton } from "@/components/portfolio/linkedin-logo-button";
-import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio";
-import { cn } from "@/lib/utils";
-import { Mail } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import Image from "next/image";
 
 export function Hero() {
@@ -35,45 +33,36 @@ export function Hero() {
           <p className="reveal delay-2 mt-3 text-sm text-ink/45">
             {t.profile.location}
           </p>
-          <div className="reveal delay-3 hero-cta-row mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
-            <div className="hero-cta-pair flex flex-wrap items-center gap-3">
-              <CvDownloadDialog
-                triggerClassName={cn(
-                  "hero-cta hero-cta-primary",
-                  "rounded-full bg-gold px-6 text-teal-950",
-                  "shadow-[0_1px_0_color-mix(in_oklab,var(--teal-950)_12%,transparent)]",
-                  "hover:bg-[#e0c9a8] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-14px_color-mix(in_oklab,var(--gold)_55%,transparent)]",
-                  "active:translate-y-px active:shadow-none",
-                  "transition-[transform,box-shadow,background-color] duration-200 ease-out",
-                  "[&_svg]:transition-transform [&_svg]:duration-200 [&_svg]:ease-out",
-                  "hover:[&_svg]:-translate-y-px",
-                )}
-              />
-              <a
-                href="#contact"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "hero-cta hero-cta-secondary",
-                  "rounded-full border-ink/25 bg-transparent px-6 text-ink",
-                  "hover:-translate-y-0.5 hover:border-gold/45 hover:bg-ink/[0.06]",
-                  "hover:shadow-[0_0_0_1px_color-mix(in_oklab,var(--gold)_28%,transparent),0_10px_24px_-16px_color-mix(in_oklab,var(--gold)_40%,transparent)]",
-                  "active:translate-y-px active:shadow-none",
-                  "transition-[transform,box-shadow,background-color,border-color] duration-200 ease-out",
-                  "[&_svg]:transition-transform [&_svg]:duration-200 [&_svg]:ease-out",
-                  "hover:[&_svg]:translate-x-0.5",
-                )}
-              >
-                <Mail className="size-4" />
-                {t.hero.contactCta}
-              </a>
-            </div>
+
+          {/* Isak action-group: morphing Let's talk + quiet Download CV + social */}
+          <div className="reveal delay-3 hero-cta-row mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a
+              href="#contact"
+              className="hero-cta-talk"
+              aria-label={t.hero.contactCta}
+            >
+              <span className="hero-cta-talk-ic" aria-hidden>
+                <ArrowUpRight className="size-[18px]" strokeWidth={1.75} />
+              </span>
+              <span className="hero-cta-talk-text">{t.hero.contactCta}</span>
+              <span className="hero-cta-talk-ic hero-cta-talk-ic-end" aria-hidden>
+                <ArrowUpRight className="size-[18px]" strokeWidth={1.75} />
+              </span>
+            </a>
+
+            <CvDownloadDialog
+              triggerVariant="link"
+              triggerClassName="hero-cta-down"
+            >
+              <Download className="size-[18px]" strokeWidth={1.75} />
+              <span>{t.hero.downloadCv}</span>
+            </CvDownloadDialog>
+
             <div
               aria-hidden
-              className="hidden h-5 w-px bg-ink/15 sm:block"
+              className="hidden h-4 w-px shrink-0 bg-ink/15 sm:block"
             />
-            <div className="hero-cta-social flex items-center">
-              <LinkedInLogoButton className="hero-cta-social-link" />
-            </div>
+            <LinkedInLogoButton className="hero-cta-social-link" />
           </div>
         </div>
 
