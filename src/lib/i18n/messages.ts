@@ -185,7 +185,7 @@ const en: Messages = {
   },
   hero: {
     contactCta: "Let's talk",
-    downloadCv: "Download CV",
+    downloadCv: "View CV",
     linkedin: "LinkedIn",
   },
   profile: {
@@ -422,7 +422,7 @@ const id: Messages = {
   },
   hero: {
     contactCta: "Mari bicara",
-    downloadCv: "Unduh CV",
+    downloadCv: "Lihat CV",
     linkedin: "LinkedIn",
   },
   profile: {

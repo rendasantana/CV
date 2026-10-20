@@ -21,7 +21,7 @@ export function LinkedInLogoButton({ className }: LinkedInLogoButtonProps) {
       aria-label="LinkedIn"
       title="LinkedIn"
       className={cn(
-        "group inline-flex h-9 shrink-0 items-center justify-center rounded-full px-1.5",
+        "group inline-flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-full px-1.5",
         "transition-[opacity,transform] duration-200 ease-out",
         "hover:-translate-y-0.5 hover:opacity-90",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-sand",

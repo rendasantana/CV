@@ -221,6 +221,7 @@
   text-decoration: none;
   color: var(--teal-950);
   outline: none;
+  cursor: pointer;
 }
 
 .hero-cta-talk-ic,
@@ -321,6 +322,7 @@
   color: color-mix(in oklab, var(--ink) 72%, transparent) !important;
   background: transparent !important;
   box-shadow: none !important;
+  cursor: pointer !important;
   transition:
     color 0.3s ease,
     transform 0.2s ease,
@@ -352,6 +354,7 @@
 }
 
 .hero-cta-social-link {
+  cursor: pointer;
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
