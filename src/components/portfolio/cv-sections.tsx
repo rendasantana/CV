@@ -1,3 +1,5 @@
+import { SampleTestCasesCta } from "@/components/portfolio/sample-test-cases-cta";
+import { ScenariosDownloadDialog } from "@/components/portfolio/scenarios-download-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -8,12 +10,13 @@ import {
   projects,
   skills,
 } from "@/lib/portfolio";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FileSpreadsheet } from "lucide-react";
 
 const sectionOrder = [
   "about",
   "case-studies",
   "projects",
+  "sample-test-cases",
   "experience",
   "skills",
   "education",
@@ -180,7 +183,18 @@ export function CvSections() {
                   {project.description}
                 </p>
                 {project.proofLinks && project.proofLinks.length > 0 ? (
-                  <ul className="mt-4 flex flex-wrap gap-3">
+                  <ul className="mt-4 flex flex-wrap items-center gap-3">
+                    {project.id === "majoo-dashboard" ? (
+                      <li>
+                        <ScenariosDownloadDialog
+                          triggerClassName="h-8 rounded-full border border-gold/30 bg-transparent px-3 text-sm text-gold hover:bg-gold/10 hover:text-gold"
+                          triggerLabel="Preview Login & Register scenarios"
+                        >
+                          <FileSpreadsheet className="size-3.5" />
+                          Preview Login & Register scenarios
+                        </ScenariosDownloadDialog>
+                      </li>
+                    ) : null}
                     {project.proofLinks.map((link) => (
                       <li key={`${link.label}-${link.href}`}>
                         <a
@@ -201,6 +215,8 @@ export function CvSections() {
             ))}
           </div>
         </section>
+
+        <SampleTestCasesCta />
 
         <section id="experience" className="scroll-mt-24">
           <SectionHeader

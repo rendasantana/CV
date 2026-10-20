@@ -1,6 +1,8 @@
 export type NavSection = {
   id: string;
   title: string;
+  /** Optional absolute path (e.g. /test-cases) instead of #id */
+  href?: string;
 };
 
 export type ExperienceRole = {
@@ -73,6 +75,11 @@ export const navSections: NavSection[] = [
   { id: "about", title: "About" },
   { id: "case-studies", title: "Case studies" },
   { id: "projects", title: "Projects" },
+  {
+    id: "sample-test-cases",
+    title: "Sample test cases",
+    href: "/test-cases",
+  },
   { id: "experience", title: "Experience" },
   { id: "skills", title: "Skills" },
   { id: "education", title: "Education" },
@@ -181,8 +188,17 @@ export const projects: Project[] = [
     title: "Majoo Dashboard",
     context: "Sales & employee management",
     description:
-      "Sales and employee management dashboard testing, including API and UI.",
-    proofLinks: undefined,
+      "Sales and employee management dashboard testing, including API and UI. Portfolio sample: Login & Register scenarios (XLSX) + mapped test cases.",
+    proofLinks: [
+      {
+        label: "Login & Register scenarios (XLSX)",
+        href: "/majoo-dashboard-login-register-scenarios.xlsx",
+      },
+      {
+        label: "Sample test cases (Majoo Auth suite)",
+        href: "/test-cases#majoo-dashboard-auth",
+      },
+    ],
   },
   {
     id: "majoo-cockpit",

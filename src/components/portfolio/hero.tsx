@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
-import { Download, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -27,19 +28,11 @@ export function Hero() {
           <p className="reveal delay-2 mt-5 max-w-lg text-sm leading-relaxed text-ink/70 sm:text-base">
             {profile.tagline}
           </p>
-          <p className="reveal delay-2 mt-3 text-sm text-ink/45">{profile.location}</p>
+          <p className="reveal delay-2 mt-3 text-sm text-ink/45">
+            {profile.location}
+          </p>
           <div className="reveal delay-3 mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href={profile.cvPdf}
-              download
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "rounded-full bg-gold px-6 text-teal-950 hover:bg-[#e0c9a8]",
-              )}
-            >
-              <Download className="size-4" />
-              Download CV
-            </a>
+            <CvDownloadDialog />
             <a
               href="#contact"
               className={cn(

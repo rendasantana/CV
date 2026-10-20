@@ -1,11 +1,14 @@
+import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
-import { Download } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="scroll-mt-24 border-t border-ink/10 bg-teal-950 text-ink">
+    <footer
+      id="contact"
+      className="scroll-mt-24 border-t border-ink/10 bg-teal-950 text-ink"
+    >
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-14 sm:flex-row sm:items-end sm:justify-between sm:px-10">
         <div>
           <p className="text-xs font-medium tracking-[0.2em] text-gold/55 uppercase">
@@ -22,17 +25,7 @@ export function SiteFooter() {
           <p className="mt-1 text-sm text-ink/40">{profile.email}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <a
-            href={profile.cvPdf}
-            download
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "rounded-full bg-gold text-teal-950 hover:bg-[#e0c9a8]",
-            )}
-          >
-            <Download className="size-4" />
-            Download CV
-          </a>
+          <CvDownloadDialog />
           <a
             href={`mailto:${profile.email}`}
             className={cn(
