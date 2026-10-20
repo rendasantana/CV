@@ -1,12 +1,10 @@
 "use client";
 
 import { useLocale } from "@/components/i18n/locale-provider";
+import { ContactIcons } from "@/components/portfolio/contact-icons";
 import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
-import { LinkedInLogoButton } from "@/components/portfolio/linkedin-logo-button";
-import { buttonVariants } from "@/components/ui/button";
 import { formatMessage } from "@/lib/i18n/messages";
 import { profile } from "@/lib/portfolio";
-import { cn } from "@/lib/utils";
 
 export function SiteFooter() {
   const { t } = useLocale();
@@ -33,27 +31,9 @@ export function SiteFooter() {
           <p className="mt-3 text-sm text-ink/40">{profile.phone}</p>
           <p className="mt-1 text-sm text-ink/40">{profile.email}</p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col items-start gap-5 sm:items-end">
           <CvDownloadDialog />
-          <a
-            href={`mailto:${profile.email}`}
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "rounded-full border-ink/20 bg-transparent text-ink hover:bg-ink/10",
-            )}
-          >
-            {t.contact.email}
-          </a>
-          <a
-            href={profile.phoneHref}
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "rounded-full border-ink/20 bg-transparent text-ink hover:bg-ink/10",
-            )}
-          >
-            {t.contact.call}
-          </a>
-          <LinkedInLogoButton />
+          <ContactIcons className="sm:items-end" />
         </div>
       </div>
       <div className="border-t border-ink/10 px-6 py-4 text-center text-xs text-ink/35 sm:px-10 sm:text-left">

@@ -106,6 +106,9 @@ export type Messages = {
     email: string;
     call: string;
     linkedin: string;
+    whatsapp: string;
+    github: string;
+    reachVia: string;
     footer: string;
   };
   cvDialog: {
@@ -341,6 +344,9 @@ const en: Messages = {
     email: "Email",
     call: "Call",
     linkedin: "LinkedIn",
+    whatsapp: "WhatsApp",
+    github: "GitHub",
+    reachVia: "Reach me",
     footer: "© {year} {name}. CV / portfolio page.",
   },
   cvDialog: {
@@ -577,6 +583,9 @@ const id: Messages = {
     email: "Email",
     call: "Telepon",
     linkedin: "LinkedIn",
+    whatsapp: "WhatsApp",
+    github: "GitHub",
+    reachVia: "Hubungi lewat",
     footer: "© {year} {name}. Halaman CV / portfolio.",
   },
   cvDialog: {

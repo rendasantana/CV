@@ -56,7 +56,10 @@ export const profile = {
   email: "rendasantana@gmail.com",
   phone: "+6281358571315",
   phoneHref: "tel:+6281358571315",
+  whatsapp: "https://wa.me/6281358571315",
   linkedin: "https://linkedin.com/in/rendasantana",
+  /** Same handle as LinkedIn / CV repo owner; public profile confirmed. */
+  github: "https://github.com/rendasantana",
   cvPdf: "/renda-santana-cv.pdf",
   focus:
     "Passionate about improving product quality, minimizing defects, and delivering seamless user experiences.",
