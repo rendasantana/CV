@@ -20,8 +20,8 @@ import { useState, type ReactNode } from "react";
 type CvDownloadDialogProps = {
   triggerClassName?: string;
   triggerLabel?: string;
-  /** solid = gold pill (default); link = Isak-style quiet text control */
-  triggerVariant?: "solid" | "link";
+  /** solid = gold pill; link = Isak quiet text; chip = contact-row outline */
+  triggerVariant?: "solid" | "link" | "chip";
   children?: ReactNode;
 };
 
@@ -35,18 +35,21 @@ export function CvDownloadDialog({
   const { t } = useLocale();
   const label = triggerLabel ?? t.cvDialog.download;
   const isLink = triggerVariant === "link";
+  const isChip = triggerVariant === "chip";
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           <Button
-            size={isLink ? "default" : "lg"}
-            variant={isLink ? "ghost" : "default"}
+            size={isLink || isChip ? "default" : "lg"}
+            variant={isLink || isChip ? "ghost" : "default"}
             className={cn(
-              isLink
-                ? "h-auto gap-2 rounded-none border-0 bg-transparent p-0 shadow-none"
-                : "rounded-full bg-gold px-6 text-teal-950 transition-[transform,box-shadow,background-color] duration-200 ease-out hover:bg-[#e0c9a8]",
+              isChip
+                ? "shadow-none"
+                : isLink
+                  ? "h-auto gap-2 rounded-none border-0 bg-transparent p-0 shadow-none"
+                  : "rounded-full bg-gold px-6 text-teal-950 transition-[transform,box-shadow,background-color] duration-200 ease-out hover:bg-[#e0c9a8]",
               triggerClassName,
             )}
           />

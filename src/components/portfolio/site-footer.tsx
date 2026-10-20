@@ -2,7 +2,6 @@
 
 import { useLocale } from "@/components/i18n/locale-provider";
 import { ContactIcons } from "@/components/portfolio/contact-icons";
-import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
 import { formatMessage } from "@/lib/i18n/messages";
 import { profile } from "@/lib/portfolio";
 
@@ -31,10 +30,7 @@ export function SiteFooter() {
           <p className="mt-3 text-sm text-ink/40">{profile.phone}</p>
           <p className="mt-1 text-sm text-ink/40">{profile.email}</p>
         </div>
-        <div className="flex flex-col items-start gap-5 sm:items-end">
-          <CvDownloadDialog />
-          <ContactIcons className="sm:items-end" />
-        </div>
+        <ContactIcons className="sm:items-end" />
       </div>
       <div className="border-t border-ink/10 px-6 py-4 text-center text-xs text-ink/35 sm:px-10 sm:text-left">
         {formatMessage(t.contact.footer, {

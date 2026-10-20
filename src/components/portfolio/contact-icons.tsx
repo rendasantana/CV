@@ -1,10 +1,21 @@
 "use client";
 
 import { useLocale } from "@/components/i18n/locale-provider";
+import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
 import { profile } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
-import { Mail } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import type { ReactNode } from "react";
+
+/** Shared chip look for Reach me row (View CV + social/contact). */
+export const contactChipClassName = cn(
+  "group inline-flex h-11 cursor-pointer items-center gap-2 rounded-full",
+  "border border-ink/15 bg-ink/[0.03] px-3.5 text-sm font-medium text-ink/80",
+  "transition-[color,background-color,border-color,transform] duration-200 ease-out",
+  "hover:-translate-y-0.5 hover:border-gold/40 hover:bg-ink/[0.07] hover:text-gold",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-950",
+  "active:translate-y-px",
+);
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -93,6 +104,18 @@ export function ContactIcons({ className }: { className?: string }) {
         {t.contact.reachVia}
       </p>
       <ul className="flex flex-wrap items-center gap-2.5">
+        <li>
+          <CvDownloadDialog
+            triggerVariant="chip"
+            triggerLabel={t.hero.downloadCv}
+            triggerClassName={contactChipClassName}
+          >
+            <span className="text-gold/90 transition-colors group-hover:text-gold">
+              <FileText className="size-[18px]" strokeWidth={1.75} />
+            </span>
+            <span>{t.hero.downloadCv}</span>
+          </CvDownloadDialog>
+        </li>
         {links.map((link) => (
           <li key={link.id}>
             <a
@@ -102,14 +125,7 @@ export function ContactIcons({ className }: { className?: string }) {
                 : {})}
               aria-label={link.label}
               title={link.label}
-              className={cn(
-                "group inline-flex h-11 cursor-pointer items-center gap-2 rounded-full",
-                "border border-ink/15 bg-ink/[0.03] px-3.5 text-sm font-medium text-ink/80",
-                "transition-[color,background-color,border-color,transform] duration-200 ease-out",
-                "hover:-translate-y-0.5 hover:border-gold/40 hover:bg-ink/[0.07] hover:text-gold",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-950",
-                "active:translate-y-px",
-              )}
+              className={contactChipClassName}
             >
               <span className="text-gold/90 transition-colors group-hover:text-gold">
                 {link.icon}
