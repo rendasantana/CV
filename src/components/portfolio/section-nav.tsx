@@ -1,10 +1,13 @@
 "use client";
 
+import { useLocale } from "@/components/i18n/locale-provider";
 import { navSections } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export function SectionNav() {
+  const { t } = useLocale();
+
   return (
     <nav
       aria-label="CV sections"
@@ -14,17 +17,19 @@ export function SectionNav() {
         {navSections.map((section) => {
           const href = section.href ?? `#${section.id}`;
           const isRoute = href.startsWith("/");
+          const title =
+            t.nav[section.id as keyof typeof t.nav] ?? section.title;
           const className = cn(
             "shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium text-ink/55 transition-colors",
             "hover:bg-ink/8 hover:text-ink",
           );
           return isRoute ? (
             <Link key={section.id} href={href} className={className}>
-              {section.title}
+              {title}
             </Link>
           ) : (
             <a key={section.id} href={href} className={className}>
-              {section.title}
+              {title}
             </a>
           );
         })}

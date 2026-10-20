@@ -1,6 +1,10 @@
+"use client";
+
+import { useLocale } from "@/components/i18n/locale-provider";
+import { ScenariosDownloadDialog } from "@/components/portfolio/scenarios-download-dialog";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { ScenariosDownloadDialog } from "@/components/portfolio/scenarios-download-dialog";
+import { formatMessage } from "@/lib/i18n/messages";
 import { majooScenarioCount } from "@/lib/majoo-scenarios";
 import { testSuites, totalTestCases } from "@/lib/test-cases";
 import { cn } from "@/lib/utils";
@@ -8,16 +12,17 @@ import { ArrowRight, FileSpreadsheet } from "lucide-react";
 import Link from "next/link";
 
 export function SampleTestCasesCta() {
+  const { locale, t } = useLocale();
+
   return (
     <section id="sample-test-cases" className="scroll-mt-24">
       <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h3 className="font-display text-2xl tracking-tight text-ink sm:text-3xl">
-            Sample Test Cases
+            {t.sampleCta.title}
           </h3>
           <p className="mt-2 max-w-xl text-sm text-ink/50 sm:text-base">
-            Contoh format test case klasik — daftar lengkap ada di halaman
-            terpisah.
+            {t.sampleCta.blurb}
           </p>
         </div>
         <p className="text-xs font-medium tracking-wider text-gold/50 uppercase">
@@ -31,21 +36,35 @@ export function SampleTestCasesCta() {
             variant="secondary"
             className="rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-gold hover:bg-gold/10"
           >
-            Sample / Portfolio examples
+            {t.sampleCta.badge}
           </Badge>
           <span className="text-sm text-ink/45">
-            {testSuites.length} suites · {totalTestCases} cases
+            {formatMessage(t.sampleCta.suitesCases, {
+              suites: testSuites.length,
+              cases: totalTestCases,
+            })}
           </span>
         </div>
 
         <p className="max-w-3xl text-sm leading-relaxed text-ink/55 sm:text-base">
-          Browse the classical QA list (ID, steps, expected result) on a
-          dedicated page — so this portfolio stays focused on About, case
-          studies, projects, and experience. Includes a{" "}
-          <strong className="font-medium text-ink/75">
-            Majoo Dashboard — Login & Register
-          </strong>{" "}
-          sample suite ({majooScenarioCount} scenarios + mapped cases).
+          {formatMessage(t.sampleCta.body, {
+            suite: t.sampleCta.majooSuiteName,
+            scenarios: majooScenarioCount,
+          })
+            .split(t.sampleCta.majooSuiteName)
+            .flatMap((part, i, arr) =>
+              i < arr.length - 1
+                ? [
+                    part,
+                    <strong
+                      key={`suite-${i}`}
+                      className="font-medium text-ink/75"
+                    >
+                      {t.sampleCta.majooSuiteName}
+                    </strong>,
+                  ]
+                : [part],
+            )}
         </p>
 
         <ul className="mt-5 space-y-2 text-sm text-ink/55">
@@ -55,7 +74,11 @@ export function SampleTestCasesCta() {
                 ·
               </span>
               <span>
-                Suite {suite.order}: {suite.title} ({suite.cases.length})
+                {formatMessage(t.sampleCta.suiteLine, {
+                  order: suite.order,
+                  title: locale === "id" ? suite.titleId : suite.title,
+                  count: suite.cases.length,
+                })}
               </span>
             </li>
           ))}
@@ -69,12 +92,12 @@ export function SampleTestCasesCta() {
               "rounded-full bg-gold px-6 text-teal-950 hover:bg-[#e0c9a8]",
             )}
           >
-            Lihat list test case
+            {t.sampleCta.viewList}
             <ArrowRight className="size-4" />
           </Link>
-          <ScenariosDownloadDialog triggerLabel="Preview Majoo scenarios">
+          <ScenariosDownloadDialog triggerLabel={t.sampleCta.previewMajoo}>
             <FileSpreadsheet className="size-4" />
-            Preview Majoo scenarios
+            {t.sampleCta.previewMajoo}
           </ScenariosDownloadDialog>
         </div>
       </div>

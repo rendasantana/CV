@@ -1,6 +1,7 @@
+import { AppShell } from "@/components/i18n/app-shell";
+import { profile } from "@/lib/portfolio";
 import type { Metadata } from "next";
 import { Fraunces, Manrope } from "next/font/google";
-import { profile } from "@/lib/portfolio";
 import "./globals.css";
 
 const display = Fraunces({
@@ -25,7 +26,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <AppShell>{children}</AppShell>
+      </body>
     </html>
   );
 }

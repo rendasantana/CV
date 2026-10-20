@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/components/i18n/locale-provider";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { formatMessage } from "@/lib/i18n/messages";
 import {
   majooScenarioCount,
   majooScenarios,
@@ -28,10 +30,12 @@ type ScenariosDownloadDialogProps = {
 
 export function ScenariosDownloadDialog({
   triggerClassName,
-  triggerLabel = "Preview scenarios",
+  triggerLabel,
   children,
 }: ScenariosDownloadDialogProps) {
   const [open, setOpen] = useState(false);
+  const { t } = useLocale();
+  const label = triggerLabel ?? t.scenariosDialog.preview;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -49,7 +53,7 @@ export function ScenariosDownloadDialog({
         {children ?? (
           <>
             <FileSpreadsheet className="size-4" />
-            {triggerLabel}
+            {label}
           </>
         )}
       </DialogTrigger>
@@ -59,14 +63,17 @@ export function ScenariosDownloadDialog({
       >
         <DialogHeader className="border-b border-ink/10 px-5 py-4 sm:px-6">
           <DialogTitle className="font-display text-xl tracking-tight text-ink">
-            Preview test scenarios
+            {t.scenariosDialog.title}
           </DialogTitle>
           <DialogDescription className="text-ink/50">
-            {majooScenariosMeta.label} · {majooScenariosMeta.product} ·{" "}
-            {majooScenarioCount} scenarios
+            {formatMessage(t.scenariosDialog.subtitle, {
+              label: majooScenariosMeta.label,
+              product: majooScenariosMeta.product,
+              count: majooScenarioCount,
+            })}
           </DialogDescription>
           <p className="mt-2 text-xs leading-relaxed text-ink/40">
-            {majooScenariosMeta.note}
+            {t.scenariosDialog.note}
           </p>
         </DialogHeader>
         <div className="min-h-0 flex-1 overflow-auto px-5 py-4 sm:px-6">
@@ -74,20 +81,26 @@ export function ScenariosDownloadDialog({
             <table className="min-w-[52rem] w-full border-collapse text-left text-xs sm:text-sm">
               <thead className="sticky top-0 bg-teal-900/90 text-ink backdrop-blur-sm">
                 <tr>
-                  <th className="px-3 py-2.5 font-medium text-gold/80">ID</th>
-                  <th className="px-3 py-2.5 font-medium text-gold/80">Title</th>
                   <th className="px-3 py-2.5 font-medium text-gold/80">
-                    Module
+                    {t.scenariosDialog.cols.id}
                   </th>
                   <th className="px-3 py-2.5 font-medium text-gold/80">
-                    Priority
-                  </th>
-                  <th className="px-3 py-2.5 font-medium text-gold/80">Type</th>
-                  <th className="px-3 py-2.5 font-medium text-gold/80">
-                    Linked cases
+                    {t.scenariosDialog.cols.title}
                   </th>
                   <th className="px-3 py-2.5 font-medium text-gold/80">
-                    Status
+                    {t.scenariosDialog.cols.module}
+                  </th>
+                  <th className="px-3 py-2.5 font-medium text-gold/80">
+                    {t.scenariosDialog.cols.priority}
+                  </th>
+                  <th className="px-3 py-2.5 font-medium text-gold/80">
+                    {t.scenariosDialog.cols.type}
+                  </th>
+                  <th className="px-3 py-2.5 font-medium text-gold/80">
+                    {t.scenariosDialog.cols.linked}
+                  </th>
+                  <th className="px-3 py-2.5 font-medium text-gold/80">
+                    {t.scenariosDialog.cols.status}
                   </th>
                 </tr>
               </thead>
@@ -131,7 +144,7 @@ export function ScenariosDownloadDialog({
               />
             }
           >
-            Close
+            {t.scenariosDialog.close}
           </DialogClose>
           <a
             href={majooScenariosMeta.xlsxPath}
@@ -141,7 +154,7 @@ export function ScenariosDownloadDialog({
             )}
           >
             <Download className="size-4" />
-            Download XLSX
+            {t.scenariosDialog.download}
           </a>
         </DialogFooter>
       </DialogContent>

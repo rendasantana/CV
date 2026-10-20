@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/components/i18n/locale-provider";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,10 +25,12 @@ type CvDownloadDialogProps = {
 
 export function CvDownloadDialog({
   triggerClassName,
-  triggerLabel = "Download CV",
+  triggerLabel,
   children,
 }: CvDownloadDialogProps) {
   const [open, setOpen] = useState(false);
+  const { t } = useLocale();
+  const label = triggerLabel ?? t.cvDialog.download;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -45,7 +48,7 @@ export function CvDownloadDialog({
         {children ?? (
           <>
             <Download className="size-4" />
-            {triggerLabel}
+            {label}
           </>
         )}
       </DialogTrigger>
@@ -55,10 +58,10 @@ export function CvDownloadDialog({
       >
         <DialogHeader className="border-b border-ink/10 px-5 py-4 sm:px-6">
           <DialogTitle className="font-display text-xl tracking-tight text-ink">
-            Preview CV
+            {t.cvDialog.title}
           </DialogTitle>
           <DialogDescription className="text-ink/50">
-            {profile.name} — {profile.role}
+            {profile.name} — {t.profile.role}
           </DialogDescription>
         </DialogHeader>
         <div className="min-h-0 flex-1 bg-teal-950/80">
@@ -66,10 +69,10 @@ export function CvDownloadDialog({
             data={profile.cvPdf}
             type="application/pdf"
             className="h-[min(70vh,40rem)] w-full"
-            aria-label={`Preview of ${profile.name} CV PDF`}
+            aria-label={`${t.cvDialog.title}: ${profile.name}`}
           >
             <iframe
-              title={`Preview of ${profile.name} CV`}
+              title={`${t.cvDialog.title}: ${profile.name}`}
               src={profile.cvPdf}
               className="h-[min(70vh,40rem)] w-full border-0"
             />
@@ -84,7 +87,7 @@ export function CvDownloadDialog({
               />
             }
           >
-            Close
+            {t.cvDialog.close}
           </DialogClose>
           <a
             href={profile.cvPdf}
@@ -94,7 +97,7 @@ export function CvDownloadDialog({
             )}
           >
             <Download className="size-4" />
-            Download CV
+            {t.cvDialog.download}
           </a>
         </DialogFooter>
       </DialogContent>

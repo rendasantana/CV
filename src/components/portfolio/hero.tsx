@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/components/i18n/locale-provider";
 import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio";
@@ -8,6 +9,8 @@ import { Mail } from "lucide-react";
 import Image from "next/image";
 
 export function Hero() {
+  const { t } = useLocale();
+
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden px-6 pb-16 pt-20 sm:px-10 sm:pb-20 lg:justify-center lg:pb-24">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -20,16 +23,16 @@ export function Hero() {
       <div className="relative mx-auto grid w-full max-w-6xl items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14">
         <div className="order-2 max-w-xl lg:order-1 lg:max-w-none">
           <p className="reveal font-sans text-sm font-medium tracking-[0.22em] text-gold/80 uppercase">
-            {profile.role}
+            {t.profile.role}
           </p>
           <h1 className="reveal delay-1 mt-3 font-display text-[clamp(2.4rem,6.5vw,4.6rem)] leading-[0.98] tracking-tight text-ink">
             {profile.name}
           </h1>
           <p className="reveal delay-2 mt-5 max-w-lg text-sm leading-relaxed text-ink/70 sm:text-base">
-            {profile.tagline}
+            {t.profile.tagline}
           </p>
           <p className="reveal delay-2 mt-3 text-sm text-ink/45">
-            {profile.location}
+            {t.profile.location}
           </p>
           <div className="reveal delay-3 mt-8 flex flex-wrap items-center gap-3">
             <CvDownloadDialog />
@@ -41,7 +44,7 @@ export function Hero() {
               )}
             >
               <Mail className="size-4" />
-              Hubungi saya
+              {t.hero.contactCta}
             </a>
             <a
               href={profile.linkedin}
@@ -52,7 +55,7 @@ export function Hero() {
                 "rounded-full text-ink/70 hover:bg-ink/8 hover:text-ink",
               )}
             >
-              LinkedIn
+              {t.hero.linkedin}
             </a>
           </div>
         </div>
@@ -61,7 +64,7 @@ export function Hero() {
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2rem] bg-teal-900/40 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.8)] ring-1 ring-ink/10">
             <Image
               src="/renda.webp"
-              alt={`${profile.name}, Software QA Engineer`}
+              alt={`${profile.name}, ${t.profile.role}`}
               fill
               priority
               sizes="(max-width: 1024px) 90vw, 42vw"

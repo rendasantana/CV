@@ -1,13 +1,28 @@
 "use client";
 
+import { useLocale } from "@/components/i18n/locale-provider";
 import { Badge } from "@/components/ui/badge";
-import { testSuites, totalTestCases, type SampleTestCase } from "@/lib/test-cases";
+import { formatMessage } from "@/lib/i18n/messages";
+import {
+  testSuites,
+  totalTestCases,
+  type SampleTestCase,
+} from "@/lib/test-cases";
 import { ChevronDown } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 
-function CaseCard({ testCase }: { testCase: SampleTestCase }) {
+function CaseCard({
+  testCase,
+  locale,
+}: {
+  testCase: SampleTestCase;
+  locale: "en" | "id";
+}) {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const panelId = `case-${testCase.id}`;
+  const primaryTitle = locale === "id" ? testCase.titleId : testCase.title;
+  const secondaryTitle = locale === "id" ? testCase.title : testCase.titleId;
 
   return (
     <article className="border-t border-ink/10 first:border-t-0">
@@ -42,9 +57,9 @@ function CaseCard({ testCase }: { testCase: SampleTestCase }) {
             ) : null}
           </div>
           <h4 className="mt-2 font-display text-lg tracking-tight text-ink sm:text-xl">
-            {testCase.title}
+            {primaryTitle}
           </h4>
-          <p className="mt-1 text-sm text-ink/40">{testCase.titleId}</p>
+          <p className="mt-1 text-sm text-ink/40">{secondaryTitle}</p>
           <p className="mt-1 text-xs text-ink/45">{testCase.module}</p>
         </div>
         <ChevronDown
@@ -55,10 +70,10 @@ function CaseCard({ testCase }: { testCase: SampleTestCase }) {
       {open ? (
         <div id={panelId} className="space-y-5 pb-6 text-sm">
           {testCase.environment ? (
-            <Field label="Environment" body={testCase.environment} />
+            <Field label={t.testCasesBrowser.environment} body={testCase.environment} />
           ) : null}
           <Field
-            label="Preconditions"
+            label={t.testCasesBrowser.preconditions}
             body={
               <ul className="list-disc space-y-1 pl-5 text-ink/65">
                 {testCase.preconditions.map((item) => (
@@ -68,7 +83,7 @@ function CaseCard({ testCase }: { testCase: SampleTestCase }) {
             }
           />
           <Field
-            label="Test Data"
+            label={t.testCasesBrowser.testData}
             body={
               <ul className="list-disc space-y-1 pl-5 font-mono text-xs text-ink/65 sm:text-sm">
                 {testCase.testData.map((item) => (
@@ -78,7 +93,7 @@ function CaseCard({ testCase }: { testCase: SampleTestCase }) {
             }
           />
           <Field
-            label="Steps"
+            label={t.testCasesBrowser.steps}
             body={
               <ol className="list-decimal space-y-1.5 pl-5 text-ink/65">
                 {testCase.steps.map((step, i) => (
@@ -87,15 +102,26 @@ function CaseCard({ testCase }: { testCase: SampleTestCase }) {
               </ol>
             }
           />
-          <Field label="Expected Result" body={testCase.expectedResult} />
+          <Field
+            label={t.testCasesBrowser.expected}
+            body={testCase.expectedResult}
+          />
           <div className="overflow-x-auto rounded-lg border border-ink/10">
             <table className="w-full text-left text-sm">
               <thead className="bg-ink/5 text-ink/45">
                 <tr>
-                  <th className="px-3 py-2 font-medium">Actual Result</th>
-                  <th className="px-3 py-2 font-medium">Status</th>
-                  <th className="px-3 py-2 font-medium">Defect ID</th>
-                  <th className="px-3 py-2 font-medium">Notes</th>
+                  <th className="px-3 py-2 font-medium">
+                    {t.testCasesBrowser.actual}
+                  </th>
+                  <th className="px-3 py-2 font-medium">
+                    {t.testCasesBrowser.status}
+                  </th>
+                  <th className="px-3 py-2 font-medium">
+                    {t.testCasesBrowser.defect}
+                  </th>
+                  <th className="px-3 py-2 font-medium">
+                    {t.testCasesBrowser.notes}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -114,13 +140,7 @@ function CaseCard({ testCase }: { testCase: SampleTestCase }) {
   );
 }
 
-function Field({
-  label,
-  body,
-}: {
-  label: string;
-  body: ReactNode;
-}) {
+function Field({ label, body }: { label: string; body: ReactNode }) {
   return (
     <div>
       <p className="text-xs font-medium tracking-wider text-gold/50 uppercase">
@@ -132,6 +152,7 @@ function Field({
 }
 
 export function TestCasesBrowser() {
+  const { locale, t } = useLocale();
   const [activeSuite, setActiveSuite] = useState<string>("all");
 
   const filtered = useMemo(() => {
@@ -141,12 +162,12 @@ export function TestCasesBrowser() {
 
   const shownCount = filtered.reduce((n, s) => n + s.cases.length, 0);
 
-  const filterLabel = (id: string, title: string) => {
-    if (id === "web-crm") return "Web CRM";
-    if (id === "api-dashboard") return "API";
-    if (id === "mobile-perf-smoke") return "Mobile / Perf";
-    if (id === "majoo-dashboard-auth") return "Majoo Auth";
-    return title;
+  const filterLabel = (id: string, title: string, titleId: string) => {
+    if (id === "web-crm") return t.testCasesBrowser.filterWebCrm;
+    if (id === "api-dashboard") return t.testCasesBrowser.filterApi;
+    if (id === "mobile-perf-smoke") return t.testCasesBrowser.filterMobilePerf;
+    if (id === "majoo-dashboard-auth") return t.testCasesBrowser.filterMajoo;
+    return locale === "id" ? titleId : title;
   };
 
   return (
@@ -156,10 +177,13 @@ export function TestCasesBrowser() {
           variant="secondary"
           className="rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-gold hover:bg-gold/10"
         >
-          Sample / Portfolio examples
+          {t.testCasesBrowser.badge}
         </Badge>
         <span className="text-sm text-ink/45">
-          {testSuites.length} suites · {totalTestCases} cases
+          {formatMessage(t.testCasesBrowser.suitesCases, {
+            suites: testSuites.length,
+            cases: totalTestCases,
+          })}
         </span>
       </div>
 
@@ -179,7 +203,9 @@ export function TestCasesBrowser() {
               : "border border-ink/15 bg-ink/5 text-ink/65 hover:bg-ink/10 hover:text-ink"
           }`}
         >
-          All suites ({totalTestCases})
+          {formatMessage(t.testCasesBrowser.allSuites, {
+            count: totalTestCases,
+          })}
         </button>
         {testSuites.map((suite) => (
           <button
@@ -194,29 +220,40 @@ export function TestCasesBrowser() {
                 : "border border-ink/15 bg-ink/5 text-ink/65 hover:bg-ink/10 hover:text-ink"
             }`}
           >
-            {filterLabel(suite.id, suite.title)} ({suite.cases.length})
+            {filterLabel(suite.id, suite.title, suite.titleId)} (
+            {suite.cases.length})
           </button>
         ))}
       </div>
 
       <p className="mb-8 text-sm text-ink/40" aria-live="polite">
-        Showing {shownCount} case{shownCount === 1 ? "" : "s"}
         {activeSuite === "all"
-          ? " across all suites"
-          : ` in ${filterLabel(activeSuite, filtered[0]?.title ?? "")}`}
-        .
+          ? formatMessage(t.testCasesBrowser.showingAll, { count: shownCount })
+          : formatMessage(t.testCasesBrowser.showingSuite, {
+              count: shownCount,
+              suite: filterLabel(
+                activeSuite,
+                filtered[0]?.title ?? "",
+                filtered[0]?.titleId ?? "",
+              ),
+            })}
       </p>
 
       <div className="space-y-16">
         {filtered.map((suite) => (
           <section key={suite.id} id={suite.id} className="scroll-mt-28">
             <p className="text-xs font-medium tracking-[0.18em] text-gold/55 uppercase">
-              Suite {suite.order} · {suite.cases.length} cases
+              {formatMessage(t.testCasesBrowser.suiteLabel, {
+                order: suite.order,
+                count: suite.cases.length,
+              })}
             </p>
             <h2 className="mt-2 font-display text-2xl tracking-tight text-ink sm:text-3xl">
-              {suite.title}
+              {locale === "id" ? suite.titleId : suite.title}
             </h2>
-            <p className="mt-1 text-sm text-ink/40">{suite.titleId}</p>
+            <p className="mt-1 text-sm text-ink/40">
+              {locale === "id" ? suite.title : suite.titleId}
+            </p>
             <p className="mt-1 text-xs font-medium tracking-wider text-gold/45 uppercase">
               {suite.label}
             </p>
@@ -225,7 +262,11 @@ export function TestCasesBrowser() {
             </p>
             <div className="mt-6 border-t border-ink/10">
               {suite.cases.map((testCase) => (
-                <CaseCard key={testCase.id} testCase={testCase} />
+                <CaseCard
+                  key={testCase.id}
+                  testCase={testCase}
+                  locale={locale}
+                />
               ))}
             </div>
           </section>
