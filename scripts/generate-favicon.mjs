@@ -1,5 +1,5 @@
 /**
- * Regenerate favicon assets from public/renda.jpg (portfolio headshot).
+ * Regenerate favicon assets from assets/tab-icon-source.jpg (hand/flames graphic).
  * Usage: node scripts/generate-favicon.mjs
  */
 import fs from "node:fs";
@@ -9,15 +9,17 @@ import sharp from "sharp";
 import toIco from "to-ico";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const src = path.join(root, "public", "renda.jpg");
+const src = path.join(root, "assets", "tab-icon-source.jpg");
+
+if (!fs.existsSync(src)) {
+  console.error("Missing source:", src);
+  process.exit(1);
+}
 
 const meta = await sharp(src).metadata();
 const side = Math.min(meta.width, meta.height);
 const left = Math.max(0, Math.floor((meta.width - side) / 2));
-const top = Math.min(
-  Math.max(0, Math.floor(meta.height * 0.08)),
-  meta.height - side,
-);
+const top = Math.max(0, Math.floor((meta.height - side) / 2));
 
 const png512 = await sharp(src)
   .extract({ left, top, width: side, height: side })
@@ -48,4 +50,4 @@ const ico = await toIco([
 fs.writeFileSync(path.join(root, "src/app/favicon.ico"), ico);
 fs.writeFileSync(path.join(root, "public/favicon.ico"), ico);
 
-console.log("Favicon assets regenerated from", src);
+console.log("Favicon assets regenerated from", src, `(${meta.width}x${meta.height})`);
