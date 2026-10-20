@@ -2,6 +2,7 @@
 
 import { useLocale } from "@/components/i18n/locale-provider";
 import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
+import { LinkedInLogoButton } from "@/components/portfolio/linkedin-logo-button";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
@@ -46,17 +47,7 @@ export function Hero() {
               <Mail className="size-4" />
               {t.hero.contactCta}
             </a>
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "lg" }),
-                "rounded-full text-ink/70 hover:bg-ink/8 hover:text-ink",
-              )}
-            >
-              {t.hero.linkedin}
-            </a>
+            <LinkedInLogoButton />
           </div>
         </div>
 

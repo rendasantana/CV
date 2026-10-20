@@ -2,6 +2,7 @@
 
 import { useLocale } from "@/components/i18n/locale-provider";
 import { CvDownloadDialog } from "@/components/portfolio/cv-download-dialog";
+import { LinkedInLogoButton } from "@/components/portfolio/linkedin-logo-button";
 import { buttonVariants } from "@/components/ui/button";
 import { formatMessage } from "@/lib/i18n/messages";
 import { profile } from "@/lib/portfolio";
@@ -52,17 +53,7 @@ export function SiteFooter() {
           >
             {t.contact.call}
           </a>
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "rounded-full border-ink/20 bg-transparent text-ink hover:bg-ink/10",
-            )}
-          >
-            {t.contact.linkedin}
-          </a>
+          <LinkedInLogoButton />
         </div>
       </div>
       <div className="border-t border-ink/10 px-6 py-4 text-center text-xs text-ink/35 sm:px-10 sm:text-left">
